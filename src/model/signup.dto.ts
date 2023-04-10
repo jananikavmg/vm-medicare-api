@@ -1,5 +1,5 @@
-import { IsEmail, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from "class-validator";
-import { EmailNotRegistered } from "../validation/email.validation";
+import { IsDate, IsEmail, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from "class-validator";
+import { Type } from "class-transformer";
 
 export class SignupDto{
     @IsNotEmpty()
@@ -13,8 +13,6 @@ export class SignupDto{
     @IsString()
     @MinLength(8)
     @MaxLength(50)
-
-
     password: string;
     @IsNotEmpty()
     @IsString()
@@ -29,16 +27,15 @@ export class SignupDto{
     @Matches(/^[a-z\d-]+$/)
     lastName: string;
    @IsNotEmpty()
-   @MinLength(8)
-   @MaxLength(50)
+   @Type(() => Date)
+   @IsDate()
    dateOfBirth: number;
    @IsNotEmpty()
-   
    @IsEmail()
- 
    email: string;
    @IsNotEmpty()
-   @MaxLength(10)
+   @MinLength(10)
+   
    phoneNumber: number;
    @IsNotEmpty()
    @IsString()
